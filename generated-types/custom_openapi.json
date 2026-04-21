@@ -1,0 +1,204 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Custom API from TS Definitions",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/example-custom-endpoint/{pathParam}": {
+      "post": {
+        "parameters": [
+          {
+            "name": "pathParam",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneratedExampleCustomEndpointPathParamPostBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GeneratedExampleCustomEndpointPathParamPostOk"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GeneratedExampleCustomEndpointPathParamPostErr"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "name": "pathParam",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GeneratedExampleCustomEndpointPathParamGetOk"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GeneratedExampleCustomEndpointPathParamGetErr"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GeneratedExampleCustomEndpointPathParamPostQuery": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "userId"
+        ],
+        "additionalProperties": false
+      },
+      "GeneratedExampleCustomEndpointPathParamPostBody": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "GeneratedExampleCustomEndpointPathParamPostOk": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "user",
+          "id",
+          "description"
+        ],
+        "additionalProperties": false
+      },
+      "GeneratedExampleCustomEndpointPathParamPostErr": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "errorMsg": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "errorMsg",
+          "errorCode"
+        ],
+        "additionalProperties": false
+      },
+      "GeneratedExampleCustomEndpointPathParamGetOk": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false,
+        "description": "Schema example"
+      },
+      "GeneratedExampleCustomEndpointPathParamGetErr": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "errorMsg": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "errorMsg",
+          "errorCode"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}
