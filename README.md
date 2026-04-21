@@ -43,7 +43,7 @@ git clone --depth 1 https://github.com/Geancarlo-Cojocaru/openapi-typescript-too
 **If you are using the generators**, you need to install these dev dependencies:
 
 ```bash
-npm install -D openapi-typescript typescript
+npm install -D openapi-typescript typescript ts-json-schema-generator
 ```
 
 and also add the following scripts in your `package.json` for type generation - adjust the paths in the scripts if you installed the tools in a different directory:
