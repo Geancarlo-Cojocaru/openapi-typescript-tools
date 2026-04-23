@@ -4,7 +4,7 @@ import { type Definition, schema } from './schemas/_helpers';
  * Custom schemas, to simplify writing the definition.
  * Use https://app.quicktype.io/ to generate them.
  */
-import { SchemaExample } from './schemas/example';
+import type { SchemaExample } from './schemas/example';
 
 /**
  * Custom API endpoints definition

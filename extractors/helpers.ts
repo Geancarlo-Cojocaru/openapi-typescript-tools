@@ -5,7 +5,7 @@ export type HttpMethod = 'get' | 'put' | 'post' | 'delete' | 'options' | 'head' 
 export type MediaType = `${string}/${string}`;
 
 /** Return `responses` for an Operation Object */
-export type ResponseObjectMap<T> = T extends { responses: any } ? T['responses'] : unknown;
+export type ResponseObjectMap<T> = T extends { responses: unknown } ? T['responses'] : unknown;
 
 /** Get a union of OK Statuses */
 export type OKStatusUnion<T> = FilterKeys<T, OkStatus>;
@@ -21,7 +21,7 @@ export type ErrorStatus = 500 | 501 | 502 | 503 | 504 | 505 | 506 | 507 | 508 | 
 
 /** Helper to get the required keys of an object. If no keys are required, will be `undefined` with strictNullChecks enabled, else `never` */
 type RequiredKeysOfHelper<T> = {
-  [K in keyof T]: {} extends Pick<T, K> ? never : K;
+  [K in keyof T]: object extends Pick<T, K> ? never : K;
 }[keyof T];
 
 /** Get the required keys of an object, or `never` if no keys are required */

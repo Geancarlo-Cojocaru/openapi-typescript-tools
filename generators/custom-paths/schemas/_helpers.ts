@@ -7,6 +7,7 @@
 /**
  * This function is a no-op at runtime and serves only to carry type information.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function schema<T>(): null {
   return null;
 }

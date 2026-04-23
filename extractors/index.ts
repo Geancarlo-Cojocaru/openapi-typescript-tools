@@ -1,8 +1,8 @@
-import {
+import type {
   components,
   paths,
 } from '../generated-types';
-import {
+import type {
   HttpMethod,
   FilterKeys,
   MediaType,

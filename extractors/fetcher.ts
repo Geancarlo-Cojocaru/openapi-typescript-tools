@@ -1,8 +1,8 @@
-import {
+import type {
   HttpMethod,
   RequiredKeysOf,
 } from './helpers';
-import {
+import type {
   UsedPaths,
   ApiPathParams,
   ApiQueryParams,
