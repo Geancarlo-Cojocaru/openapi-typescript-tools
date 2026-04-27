@@ -8,8 +8,8 @@ While the `openapi-typescript` library provides excellent tools for generating T
 
 1.  **Powerful Type Extractors**: Seamlessly extract types for specific schemas, successful responses, error responses, request bodies, path parameters, and query parameters directly from your generated OpenAPI definitions.
 2.  **Automated Type Merging**: Automatically generate and merge types from multiple OpenAPI sources into a single, unified source of truth, simplifying imports across your project.
-3.  **Support for Legacy/Undocumented APIs**: Easily create JSON documentation and TypeScript schemas for older or non-OpenAPI services using a familiar, type-safe DSL.
-4.  **Flexible Fetcher Utilities**: Build custom, type-safe fetchers or lightweight wrappers around `openapi-typescript`'s fetchers to meet specific architectural requirements
+3.  **Support for Legacy/Undocumented APIs**: Create JSON documentation and TypeScript schemas for older or non-OpenAPI services using a familiar, type-safe DSL.
+4.  **Flexible Fetcher Utilities**: Build custom, type-safe fetchers or lightweight wrappers around `openapi-typescript`'s fetchers to meet specific architectural requirements.
 
 > **You don't need to use the generators.** You can use only the extractors by importing from `openapi-typescript-tools/extractors` and supplying your own `components` and `paths` types.
 
@@ -62,6 +62,16 @@ Then in the command line in the project root, run the following command to gener
 
 ```bash
 npm run openapi:generate
+```
+
+> **Note:** The generation scripts use the `.mjs` extension. If your project has **ESLint** installed, you should update your configuration to ignore these files and the generated types to avoid linting conflicts. In your `eslint.config.js` (flat config), ensure you have:
+
+```js
+export default [
+  {
+    ignores: ['**/*.mjs', './src/lib/openapi-typescript-tools/generated-types/*.ts'],
+  },
+];
 ```
 
 ## Project Structure
@@ -121,7 +131,7 @@ These utility types work with any `components` and `paths` that follow the [open
 ### Available Extractor Types
 
 | Type | Description | Example |
-|------|-------------|---------|
+| :--- | :--- | :--- |
 | `ApiSchema<SchemaName>` | Extract a component schema by name. `SchemaName` must be an existing schema. | `ApiSchema<'User'>` |
 | `ApiPathMethods<path>` | Get available HTTP methods for a path. `path` must be an existing path. | `ApiPathMethods<'/products'>` |
 | `ApiPathParams<path, method>` | Get path parameters for an endpoint. `path` must be an existing path and `method` must be an existing method for that path. | `ApiPathParams<'/products/{id}', 'get'>` |
@@ -192,7 +202,7 @@ The library provides fetcher type definitions in `extractors/fetcher.ts` that yo
 ### Key Fetcher Types
 
 | Type | Description |
-|------|-------------|
+| :--- | :--- |
 | `ApiFetchFunc` | Function signature for a type-safe fetcher |
 | `ApiFetchConfig<Path, Method>` | Fully typed config (path params, query, body, headers, etc.) |
 | `ApiFetchResponse<Data, Error>` | Response shape with `data`, `error`, and `response` |
@@ -232,6 +242,9 @@ import type {
   ApiOkResponse as OpenApiOkResponse,
   ApiErrorResponse as OpenApiErrorResponse,
   ApiPathMethods as OpenApiPathMethods,
+  ApiPathParams as OpenApiPathParams,
+  ApiQueryParams as OpenApiQueryParams,
+  ApiRequestBody as OpenApiRequestBody,
   ComponentsKeys,
   UsedPaths,
 } from '@/openapi-typescript-tools/extractors';
@@ -257,6 +270,30 @@ declare global {
     Path extends keyof UsedPaths, 
     Method extends OpenApiPathMethods<Path>
   > = OpenApiOkResponse<Path, Method>;
+
+  /**
+   * @extends OpenApiPathParams
+   */
+  type ApiPathParams<Path extends keyof UsedPaths, Method extends OpenApiPathMethods<Path>> = OpenApiPathParams<
+    Path,
+    Method
+  >;
+
+  /**
+   * @extends OpenApiQueryParams
+   */
+  type ApiQueryParams<Path extends keyof UsedPaths, Method extends OpenApiPathMethods<Path>> = OpenApiQueryParams<
+    Path,
+    Method
+  >;
+
+  /**
+   * @extends OpenApiRequestBody
+   */
+  type ApiRequestBody<Path extends keyof UsedPaths, Method extends OpenApiPathMethods<Path>> = OpenApiRequestBody<
+    Path,
+    Method
+  >;
 }
 ```
 
@@ -264,4 +301,4 @@ Now you can use `ApiSchema`, `ApiOkResponse`, and `ApiErrorResponse` anywhere in
 
 ## License
 
-[MIT](LICENSE)
+MIT
